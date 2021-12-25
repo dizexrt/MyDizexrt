@@ -1,7 +1,9 @@
 import discord
-from discord.ext import commands
+from discord.ext.commands import Bot
+from discord.commands import ApplicationContext
+from dizexrt import db
 
-class AlertContext(commands.Context):
+class AlertContext(ApplicationContext):
 
     async def alert(self, message):
         embed = discord.Embed()
@@ -9,7 +11,7 @@ class AlertContext(commands.Context):
         embed.description = message
         return await self.send(embed = embed)
 
-class MyClient(commands.Bot):
+class MyClient(Bot):
 
     async def get_context(self, message, *, cls=AlertContext):
         return await super().get_context(message, cls=cls)
