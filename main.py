@@ -14,7 +14,7 @@ async def test(ctx):
 
 @client.slash_command()
 async def hello(ctx):
-    await ctx.reply("Hello world")
+    await ctx.response("Hello world")
 
 '''
 for file in os.listdir('cogs'):
