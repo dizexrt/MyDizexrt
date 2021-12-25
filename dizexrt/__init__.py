@@ -1,1 +1,1 @@
-from .alert import MyClient
+from .client import MyClient
