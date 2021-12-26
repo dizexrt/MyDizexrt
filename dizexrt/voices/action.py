@@ -1,11 +1,5 @@
 import discord
-from discord.ext.commands.flags import F
 from gtts import gTTS
-
-__all__ = (
-    'TTS_Source',
-    'Voice',
-)
 
 class Voice:
 
@@ -35,13 +29,9 @@ class Voice:
             ctx.alert(f'{self.client.user.name} is moved to voice channel {ctx.voice_client.channel.mention}')
             return True
     
-class TTS_Source(discord.FFmpegPCMAudio):
-
-    def __init__(self, text:str):
-        self.path = 'dizexrt/voice/source/tts.mp3'
-        self.extract(text)
-        super().__init__(self.path)
-
-    def extract(self, text:str):
-        tts = gTTS(text, lang = 'th')
-        tts.save(self.path)
+    def tts(self, *message:str):
+        tts_path = 'dizexrt/voices/source/tts.mp3'
+        #FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+        tts = gTTS(" ".join(message), lang = 'th')
+        tts.save(tts_path)
+        return discord.FFmpegPCMAudio(tts_path)
